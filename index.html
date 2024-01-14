@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>クリックの切り替え</title>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <button id="clickElement">
+        クリックすんなよ
+    </button>
+
+    <p>デバイスサイズが768px以上ではclickイベント</p>
+    <p>デバイスサイズが768px以下ではtouchendイベント</p>
+
+<script>
+        var touchThreshold = 768;//タッチイベントにする閾値
+        var InteractionType = 'click';
+
+        if (window.innerWidth <= touchThreshold) {
+            // スマホやタブレットの場合の処
+            InteractionType = 'touchend';
+        }
+</script>
+<script>
+    $(document).ready(function () {
+        $("#clickElement").on(`${InteractionType}`, function (event) {
+            alert(event.type);
+        });
+    });
+</script>
+</body>
+
+<style>
+    /* 指定された要素内でのテキストの選択をできなくします */
+    * {
+    user-select: none;
+    }
+    /* ボタン  */
+    #clickElement{
+        height: 100px;
+        width: 250px;
+        text-align: center;
+    }
+</style>
+
+</html>
